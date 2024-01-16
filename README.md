@@ -17,6 +17,12 @@
 
 An Ansible role to install and configure a PufferPanel server based on Docker on your hosts.
 
+This Ansible role streamlines the process of installing PufferPanel, a multi-service distribution for managing online game servers. Leveraging Docker as its foundation, it rapidly and efficiently deploys the PufferPanel environment on the target server.
+
+Customize the installation by adjusting key parameters such as the Docker container name, data paths, and Web/SFTP addresses and ports. Ensure Docker is pre-installed on the target system before using this role.
+
+Simplify the deployment of PufferPanel with this Ansible role, ensuring a quick and customizable installation while harnessing the power of Docker. Automate the management of your online game servers efficiently and optimally.
+
 ## Folder structure
 
 By default Ansible will look in each directory within a role for a main.yml file for relevant content (also man.yml and main):
