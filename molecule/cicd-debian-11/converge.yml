@@ -13,11 +13,12 @@
       tags:
         - "labocbz.install_pufferpanel"
       vars:
-        inv_install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
-        inv_install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
-        inv_install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
-        inv_install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
-        inv_install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
-        inv_install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
+        install_pufferpanel_container_name: "{{ inv_install_pufferpanel_container_name }}"
+        install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
+        install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
+        install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
+        install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
+        install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
+        install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
       ansible.builtin.include_role:
         name: "labocbz.install_pufferpanel"

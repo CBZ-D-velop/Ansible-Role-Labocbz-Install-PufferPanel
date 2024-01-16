@@ -1,5 +1,6 @@
 ---
 
+inv_install_pufferpanel_container_name: "pufferPanel"
 inv_install_pufferpanel_data_path: "/var/lib/pufferpanel"
 inv_install_pufferpanel_web_address: "0.0.0.0"
 inv_install_pufferpanel_web_port: 8080

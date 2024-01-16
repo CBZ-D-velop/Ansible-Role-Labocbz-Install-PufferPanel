@@ -19,12 +19,6 @@ An Ansible role to install and configure a PufferPanel server based on Docker on
 
 ## Folder structure
 
-$ mkdir -p /var/lib/pufferpanel
-$ docker volume create pufferpanel-config
-$ docker create --name pufferpanel -p 8080:8080 -p 5657:5657 -v pufferpanel-config:/etc/pufferpanel -v /var/lib/pufferpanel:/var/lib/pufferpanel -v /var/run/docker.sock:/var/run/docker.sock --restart=on-failure pufferpanel/pufferpanel:latest
-$ docker start pufferpanel
-$ docker exec -it pufferpanel /pufferpanel/pufferpanel user add
-
 By default Ansible will look in each directory within a role for a main.yml file for relevant content (also man.yml and main):
 
 ```PYTHON
@@ -107,6 +101,7 @@ Some vars a required to run this role:
 ```YAML
 ---
 
+install_pufferpanel_container_name: "pufferPanel"
 install_pufferpanel_data_path: "/var/lib/pufferpanel"
 install_pufferpanel_web_address: "0.0.0.0"
 install_pufferpanel_web_port: 8080
@@ -126,6 +121,7 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 # From inventory
 ---
 
+inv_install_pufferpanel_container_name: "pufferPanel"
 inv_install_pufferpanel_data_path: "/var/lib/pufferpanel"
 inv_install_pufferpanel_web_address: "0.0.0.0"
 inv_install_pufferpanel_web_port: 8080
@@ -150,12 +146,13 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
   tags:
     - "labocbz.install_pufferpanel"
   vars:
-    inv_install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
-    inv_install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
-    inv_install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
-    inv_install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
-    inv_install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
-    inv_install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
+    install_pufferpanel_container_name: "{{ inv_install_pufferpanel_container_name }}"
+    install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
+    install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
+    install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
+    install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
+    install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
+    install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
   ansible.builtin.include_role:
     name: "labocbz.install_pufferpanel"
 ```
