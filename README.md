@@ -19,6 +19,12 @@ An Ansible role to install and configure a PufferPanel server based on Docker on
 
 ## Folder structure
 
+$ mkdir -p /var/lib/pufferpanel
+$ docker volume create pufferpanel-config
+$ docker create --name pufferpanel -p 8080:8080 -p 5657:5657 -v pufferpanel-config:/etc/pufferpanel -v /var/lib/pufferpanel:/var/lib/pufferpanel -v /var/run/docker.sock:/var/run/docker.sock --restart=on-failure pufferpanel/pufferpanel:latest
+$ docker start pufferpanel
+$ docker exec -it pufferpanel /pufferpanel/pufferpanel user add
+
 By default Ansible will look in each directory within a role for a main.yml file for relevant content (also man.yml and main):
 
 ```PYTHON
@@ -100,7 +106,14 @@ Some vars a required to run this role:
 
 ```YAML
 ---
-your defaults vars here
+
+install_pufferpanel_data_path: "/var/lib/pufferpanel"
+install_pufferpanel_web_address: "0.0.0.0"
+install_pufferpanel_web_port: 8080
+install_pufferpanel_sftp_address: "0.0.0.0"
+install_pufferpanel_sftp_port: 5657
+install_pufferpanel_config_path: "/etc/pufferpanel"
+
 ```
 
 The best way is to modify these vars by copy the ./default/main.yml file into the ./vars and edit with your personnals requirements.
@@ -112,13 +125,20 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 ```YAML
 # From inventory
 ---
-all vars from to put/from your inventory
+
+inv_install_pufferpanel_data_path: "/var/lib/pufferpanel"
+inv_install_pufferpanel_web_address: "0.0.0.0"
+inv_install_pufferpanel_web_port: 8080
+inv_install_pufferpanel_sftp_address: "0.0.0.0"
+inv_install_pufferpanel_sftp_port: 5657
+inv_install_pufferpanel_config_path: "/etc/pufferpanel"
+
 ```
 
 ```YAML
 # From AWX / Tower
 ---
-all vars from to put/from AWX / Tower
+
 ```
 
 ### Run
@@ -126,8 +146,18 @@ all vars from to put/from AWX / Tower
 To run this role, you can copy the molecule/default/converge.yml playbook and add it into your playbook:
 
 ```YAML
----
-your converge.yml file here
+- name: "Include labocbz.install_pufferpanel"
+  tags:
+    - "labocbz.install_pufferpanel"
+  vars:
+    inv_install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
+    inv_install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
+    inv_install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
+    inv_install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
+    inv_install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
+    inv_install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
+  ansible.builtin.include_role:
+    name: "labocbz.install_pufferpanel"
 ```
 
 ## Architectural Decisions Records
@@ -146,3 +176,4 @@ Here you can put your change to keep a trace of your work and decisions.
 
 * [Ansible role documentation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
 * [Ansible Molecule documentation](https://molecule.readthedocs.io/)
+* [Installing PufferPanel using Docker](https://docs.pufferpanel.com/en/2.x/installing-docker.html)
