@@ -1,0 +1,9 @@
+---
+
+inv_install_pufferpanel__container_name: "pufferPanel"
+inv_install_pufferpanel__data_path: "/var/lib/pufferpanel"
+inv_install_pufferpanel__web_address: "0.0.0.0"
+inv_install_pufferpanel__web_port: 8080
+inv_install_pufferpanel__sftp_address: "0.0.0.0"
+inv_install_pufferpanel__sftp_port: 5657
+inv_install_pufferpanel__config_path: "/etc/pufferpanel"
