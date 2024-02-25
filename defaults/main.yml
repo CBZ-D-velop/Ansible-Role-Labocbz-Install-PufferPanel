@@ -1,9 +1,9 @@
 ---
 
-install_pufferpanel_container_name: "pufferPanel"
-install_pufferpanel_data_path: "/var/lib/pufferpanel"
-install_pufferpanel_web_address: "0.0.0.0"
-install_pufferpanel_web_port: 8080
-install_pufferpanel_sftp_address: "0.0.0.0"
-install_pufferpanel_sftp_port: 5657
-install_pufferpanel_config_path: "/etc/pufferpanel"
+install_pufferpanel__container_name: "pufferPanel"
+install_pufferpanel__data_path: "/var/lib/pufferpanel"
+install_pufferpanel__web_address: "0.0.0.0"
+install_pufferpanel__web_port: 8080
+install_pufferpanel__sftp_address: "0.0.0.0"
+install_pufferpanel__sftp_port: 5657
+install_pufferpanel__config_path: "/etc/pufferpanel"

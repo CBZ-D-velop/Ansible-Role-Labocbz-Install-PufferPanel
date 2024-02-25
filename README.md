@@ -107,13 +107,13 @@ Some vars a required to run this role:
 ```YAML
 ---
 
-install_pufferpanel_container_name: "pufferPanel"
-install_pufferpanel_data_path: "/var/lib/pufferpanel"
-install_pufferpanel_web_address: "0.0.0.0"
-install_pufferpanel_web_port: 8080
-install_pufferpanel_sftp_address: "0.0.0.0"
-install_pufferpanel_sftp_port: 5657
-install_pufferpanel_config_path: "/etc/pufferpanel"
+install_pufferpanel__container_name: "pufferPanel"
+install_pufferpanel__data_path: "/var/lib/pufferpanel"
+install_pufferpanel__web_address: "0.0.0.0"
+install_pufferpanel__web_port: 8080
+install_pufferpanel__sftp_address: "0.0.0.0"
+install_pufferpanel__sftp_port: 5657
+install_pufferpanel__config_path: "/etc/pufferpanel"
 
 ```
 
@@ -127,13 +127,13 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 # From inventory
 ---
 
-inv_install_pufferpanel_container_name: "pufferPanel"
-inv_install_pufferpanel_data_path: "/var/lib/pufferpanel"
-inv_install_pufferpanel_web_address: "0.0.0.0"
-inv_install_pufferpanel_web_port: 8080
-inv_install_pufferpanel_sftp_address: "0.0.0.0"
-inv_install_pufferpanel_sftp_port: 5657
-inv_install_pufferpanel_config_path: "/etc/pufferpanel"
+inv_install_pufferpanel__container_name: "pufferPanel"
+inv_install_pufferpanel__data_path: "/var/lib/pufferpanel"
+inv_install_pufferpanel__web_address: "0.0.0.0"
+inv_install_pufferpanel__web_port: 8080
+inv_install_pufferpanel__sftp_address: "0.0.0.0"
+inv_install_pufferpanel__sftp_port: 5657
+inv_install_pufferpanel__config_path: "/etc/pufferpanel"
 
 ```
 
@@ -152,13 +152,13 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
   tags:
     - "labocbz.install_pufferpanel"
   vars:
-    install_pufferpanel_container_name: "{{ inv_install_pufferpanel_container_name }}"
-    install_pufferpanel_data_path: "{{ inv_install_pufferpanel_data_path }}"
-    install_pufferpanel_web_address: "{{ inv_install_pufferpanel_web_address }}"
-    install_pufferpanel_web_port: "{{ inv_install_pufferpanel_web_port }}"
-    install_pufferpanel_sftp_address: "{{ inv_install_pufferpanel_sftp_address }}"
-    install_pufferpanel_sftp_port: "{{ inv_install_pufferpanel_sftp_port }}"
-    install_pufferpanel_config_path: "{{ inv_install_pufferpanel_config_path }}"
+    install_pufferpanel__container_name: "{{ inv_install_pufferpanel__container_name }}"
+    install_pufferpanel__data_path: "{{ inv_install_pufferpanel__data_path }}"
+    install_pufferpanel__web_address: "{{ inv_install_pufferpanel__web_address }}"
+    install_pufferpanel__web_port: "{{ inv_install_pufferpanel__web_port }}"
+    install_pufferpanel__sftp_address: "{{ inv_install_pufferpanel__sftp_address }}"
+    install_pufferpanel__sftp_port: "{{ inv_install_pufferpanel__sftp_port }}"
+    install_pufferpanel__config_path: "{{ inv_install_pufferpanel__config_path }}"
   ansible.builtin.include_role:
     name: "labocbz.install_pufferpanel"
 ```
@@ -170,6 +170,13 @@ Here you can put your change to keep a trace of your work and decisions.
 ### 2024-01-14: First Init
 
 * First init of this role with the bootstrap_role playbook by Lord Robin Crombez
+
+### 2024-02-24: Fix and CI
+
+* Added support for new CI base
+* Edit all vars with __
+* Tested and validated on Docker DIND
+* Removed docker socket local and port
 
 ## Authors
 

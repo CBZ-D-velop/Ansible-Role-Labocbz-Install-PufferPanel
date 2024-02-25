@@ -1,15 +1,15 @@
 ---
 - name: "Create install path"
   block:
-    - name: "Check if nexus-data exist"
+    - name: "Check if pufferpanel-data exist"
       register: pufferpanel_folder
       ansible.builtin.stat:
-        path: "{{ install_pufferpanel_data_path }}"
+        path: "{{ install_pufferpanel__data_path }}"
 
-    - name: "Create nexus-data directory"
+    - name: "Create pufferpanel-data directory"
       when: not pufferpanel_folder.stat.exists
       ansible.builtin.file:
-        path: "{{ install_pufferpanel_data_path }}"
+        path: "{{ install_pufferpanel__data_path }}"
         state: directory
         recurse: yes
         mode: "0700"
@@ -18,15 +18,15 @@
 
 - name: "Install PufferPanel"
   community.docker.docker_container:
-    name: "{{ install_pufferpanel_container_name }}"
+    name: "{{ install_pufferpanel__container_name }}"
     image: "pufferpanel/pufferpanel:latest"
     state: "started"
     recreate: false
     restart_policy: "always"
     ports:
-      - "{{ install_pufferpanel_web_address }}:{{ install_pufferpanel_web_port }}:8080"
-      - "{{ install_pufferpanel_sftp_address }}:{{ install_pufferpanel_sftp_port }}:5687"
+      - "{{ install_pufferpanel__web_address }}:{{ install_pufferpanel__web_port }}:8080"
+      - "{{ install_pufferpanel__sftp_address }}:{{ install_pufferpanel__sftp_port }}:5687"
     volumes:
-      - "{{ install_pufferpanel_data_path }}:/var/lib/pufferpanel"
-      - "{{ install_pufferpanel_config_path }}:/etc/pufferpanel"
+      - "{{ install_pufferpanel__data_path }}:/var/lib/pufferpanel"
+      - "{{ install_pufferpanel__config_path }}:/etc/pufferpanel"
       - "/var/run/docker.sock:/var/run/docker.sock"
